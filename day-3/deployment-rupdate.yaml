@@ -1,0 +1,45 @@
+# Deployment configuration for nginx-deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Labels for the deployment
+  labels:
+    app: nginx-deployment
+  # Name of the deployment
+  name: nginx-deployment
+spec:
+  # Number of replicas for the deployment
+  replicas: 5
+  # Selector for the deployment
+  selector:
+    matchLabels:
+      app: nginx-deployment
+  # Strategy for rolling updates
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # Maximum number of Pods that can be created above the desired replicas
+      maxSurge: 1
+      # Maximum number of unavailable Pods during the update
+      maxUnavailable: 2
+  # Template for the Pods
+  template:
+    metadata:
+      # Labels for the Pods
+      labels:
+        app: nginx-deployment
+    spec:
+      # Container configuration
+      containers:
+      # Container name and image
+      - image: nginx
+        name: nginx
+        resources:
+          # Resource limits for the container
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          # Resource requests for the container
+          requests:
+            cpu: 250m
+            memory: 128Mi
