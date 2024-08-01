@@ -1,7 +1,6 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: "2024-06-10T11:53:51Z"
   labels:
     run: triplom
   name: triplom
@@ -18,7 +17,13 @@ spec:
     ports:
     - containerPort: 80
       protocol: TCP
-    resources: {}
+    resources:
+      limits:
+        cpu: "1"
+        memory: "512Mi"
+      requests:
+        cpu: "0.5"
+        memory: "256Mi"
     terminationMessagePath: /dev/termination-log
     terminationMessagePolicy: File
     volumeMounts:
