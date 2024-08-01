@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: default
+  #immutable: true #Becomes immutable file
+data:
+  nginx.conf: |
+    events {
+      # Event configuration
+    }
+
+    http {
+      # HTTP protocol configuration
+      server {
+        # Server configuration
+        listen 80; # Port that Nginx will listen on
+        listen 443 ssl; # Port that Nginx will listen on for HTTPS
+
+        ssl_certificate /etc/nginx/tls/certificate.crt; # Path to TLS certificate
+        ssl_certificate_key /etc/nginx/tls/private-key.key; # Path to private key
+
+        location / {
+          # Root location configuration
+          return 200 'Welcome to Nginx!\n'; # Returns 200 status code and welcome message
+          add_header Content-Type text/plain; # Adds Content-Type header with text/plain value
+        }
+      }
+    }
