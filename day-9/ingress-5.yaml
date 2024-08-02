@@ -3,16 +3,15 @@ kind: Ingress
 metadata: 
   name: giropops-senhas
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /  # Annotation to rewrite the target URL
 spec:
   rules:
-  - host: giropops-senhas.io
-    http:
+  - http:
       paths:
-        - path: /
-          pathType: Prefix
-          backend: 
-            service:
-              name: giropops-senhas
-              port: 
-                number: 5000
+      - path: /  # Path for the ingress
+        pathType: Prefix
+        backend: 
+          service:
+            name: giropops-senhas  # Name of the backend service
+            port: 
+              number: 5000  # Port number of the backend service
