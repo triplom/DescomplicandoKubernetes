@@ -1,0 +1,37 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx
+  minReplicas: 2  # Minimum number of replicas
+  maxReplicas: 10  # Maximum number of replicas
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60  # Target average CPU utilization
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 60  # Target average memory utilization
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 5  # Time to wait before scaling up
+      policies:
+      - type: Percent
+        value: 100  # Scale up by 100% of current replicas
+        periodSeconds: 20  # Period over which scaling is evaluated
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Time to wait before scaling down
+      policies:
+      - type: Percent
+        value: 100  # Scale down by 100% of current replicas
+        periodSeconds: 60  # Period over which scaling is evaluated
