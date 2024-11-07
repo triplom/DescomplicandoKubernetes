@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-label-to-namespace
+spec:
+  validationFailureAction: enforce  # Ensure the policy is enforced
+  background: true                  # Run this policy in background scans for existing resources
+  rules:
+  - name: add-namespace-label
+    match:
+      resources:
+        kinds:
+        - Namespace
+    preconditions:                  # Add a condition to check if the label already exists
+      - key: "{{ request.object.metadata.labels.NS }}"
+        operator: Equals
+        value: ""
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          labels:
+            NS: "{{ request.object.metadata.name }}"
