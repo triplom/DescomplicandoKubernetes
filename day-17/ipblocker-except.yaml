@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ip-block
+  namespace: giropops
+spec:
+  policyTypes:
+  - Ingress
+  podSelector: {}
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 172.18.0.0/16
+        except:
+        - 172.18.0.112/32
