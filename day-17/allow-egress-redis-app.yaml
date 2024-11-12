@@ -5,7 +5,7 @@ metadata:
   namespace: giropops
 spec:
   policyTypes:
-  - Egrees
+  - Egress
   podSelector: 
     matchLabels:
       app: giropops-senhas
