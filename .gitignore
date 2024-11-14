@@ -4,3 +4,6 @@
 /book.mobi
 /book.epub
 .vscode
+/day*/*.crt
+/day*/*.csr
+/day*/*.key
