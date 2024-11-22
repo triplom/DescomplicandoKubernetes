@@ -1,0 +1,7 @@
+apiVersion: v2
+name: giropops-senhas
+description: Chart for the Giropops Senhas application
+version: 0.1.0
+appVersion: 1.0.0
+sources:
+  - https://github.com/badtuxx/giropops-senhas
