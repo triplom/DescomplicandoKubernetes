@@ -24,6 +24,7 @@ nodes:
 networking:
   apiServerAddress: "127.0.0.1"  # API server address for security
   apiServerPort: 6443  # API server port
+  dnsDomain: cluster.local # Define cluster dns as local
   podSubnet: "10.244.0.0/16"  # Define IP range for pods
   serviceSubnet: "10.96.0.0/12"  # Define subnet for services
 featureGates:
